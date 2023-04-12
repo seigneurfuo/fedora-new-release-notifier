@@ -5,3 +5,4 @@ packaging/rpmbuild/RPMS/
 packaging/rpmbuild/SOURCES/
 packaging/rpmbuild/SPECS/
 packaging/rpmbuild/SRPMS/
+packaging/*.log

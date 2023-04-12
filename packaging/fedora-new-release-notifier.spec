@@ -1,30 +1,27 @@
-# rpmbuild -bs
-
 Name:           fedora-new-release-notifier
 Version:        0.0.1
-Release:        1%{?dist}
+Release:        %autorelease
 BuildArch:      noarch
-Summary:        .
+Summary:        A nsi
 
 License:        None
 URL:            .
-Source0:        %{name}-%{version}.tar
+Source0:        %{name}.tar
 
 Requires:       python
 Requires:       python3-distro
 Requires:       python3-gobject-base-noarch
 
-
 %description
 A demo RPM build
 
-%install
-mkdir -p %{buildroot}/usr/bin/
+%prep
+%setup -c
 
-install -m 755 src/app.py %{buildroot}/usr/bin/%{name}
+%install
+mkdir -p %{buildroot}/%{_bindir}
+install -m 755 src/app.py %{buildroot}/%{_bindir}/%{name}
 
 %files
-/usr/bin/%{name}
-
-
+%{_bindir}/%{name}
 
