@@ -19,10 +19,15 @@ CURRENT_VERSION = int(distro.version())
 CHECK_EVERY = 3600
 
 def _get_versions_list():
-    with urllib.request.urlopen(URL) as req:
-        data = req.read()
-        if data:
-            return json.loads(data)
+    try:
+        with urllib.request.urlopen(URL) as req:
+            data = req.read()
+            if data:
+                return json.loads(data)
+
+    except urllib.error.URLError:
+        return []
+
 def get_latest_version():
     versions = _get_versions_list()
 
@@ -47,15 +52,13 @@ def get_latest_version():
 
 def _check_for_newer_version():
     latest_version = get_latest_version()
-    if not latest_version or latest_version <= CURRENT_VERSION:
-        print('Rien')
-        exit()
-
-    _send_notification(latest_version)
+    if latest_version and latest_version > CURRENT_VERSION:
+        _send_notification(latest_version)
 
 def _send_notification(latest_version):
     title = f"La version de Fedora {latest_version} est disponible !"
-    msg = f"{title}\nVous pouvez lancer la commande suivante pour mettre à jour:\nsudo dnf system-upgrade download --releasever {latest_version}"
+    cmd = f"sudo dnf system-upgrade download --releasever {latest_version}"
+    msg = f"{title}\nVous pouvez lancer la commande suivante pour mettre à jour:\n{cmd}"
 
     notification = Notify.Notification.new(title, msg, 'fedora-logo-icon')
     notification.show()
