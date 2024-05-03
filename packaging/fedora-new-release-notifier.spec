@@ -1,6 +1,3 @@
-# fedpkg --release f37 local
-# fedpkg --release f37 mockbuild --no-clean-all
-
 Name:           fedora-new-release-notifier
 Version:        0.0.1
 Release:        %autorelease
@@ -21,6 +18,9 @@ A demo RPM build
 mkdir -p %{buildroot}/%{_bindir}
 install -m 755 ../src/app.py %{buildroot}/%{_bindir}/%{name}
 
+mkdir -p %{buildroot}/usr/share/applications/
+install -m 644 ./%{name}.desktop %{buildroot}/usr/share/applications/%{name}.desktop
+
 %files
 %{_bindir}/%{name}
-
+/usr/share/applications/%{name}.desktop

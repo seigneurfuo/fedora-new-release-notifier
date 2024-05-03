@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/fedora-new-release-notifier
+Name=Fedora New Release Notifier
+Comment=
+Comment[fr_FR]=
+StartupNotify=false
+Terminal=false
+Hidden=false
