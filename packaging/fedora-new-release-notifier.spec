@@ -18,9 +18,9 @@ A demo RPM build
 mkdir -p %{buildroot}/%{_bindir}
 install -m 755 ../src/app.py %{buildroot}/%{_bindir}/%{name}
 
-mkdir -p %{buildroot}/usr/share/applications/
-install -m 644 ./%{name}.desktop %{buildroot}/usr/share/applications/%{name}.desktop
+mkdir -p %{buildroot}/usr/xdg/autostart/
+install -m 644 ./%{name}-autostart.desktop %{buildroot}/usr/xdg/autostart/%{name}.desktop
 
 %files
 %{_bindir}/%{name}
-/usr/share/applications/%{name}.desktop
+/usr/xdg/autostart/%{name}.desktop
